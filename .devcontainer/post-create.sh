@@ -8,7 +8,7 @@ echo "--- Running post-create script ---"
 
 # Activating the virtual environment
 echo "Creating virtual environment..."
-python3 -m venv .venv
-.venv/bin/pip install --upgrade pip
-.venv/bin/pip install -r requirements.txt
+python3 -m venv ../.venv
+../.venv/bin/pip install --upgrade pip
+../.venv/bin/pip install -r requirements.txt
 
