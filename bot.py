@@ -1,17 +1,18 @@
 """Discord Bot to manage a Minecraft server with auto-sleep functionality."""
 
 import subprocess
+from os import getenv
 
 import discord
 from discord.ext import tasks
 from mcstatus import JavaServer
 
 # --- CONFIGURATION ---
-TOKEN = "YOUR_DISCORD_TOKEN_HERE"
-CHANNEL_ID = 123456789012345678  # Your Channel ID
+TOKEN = getenv("DISCORD_TOKEN", "0")
+CHANNEL_ID = int(getenv("DISCORD_CHANNEL_ID", "0"))
 SERVER_IP = "127.0.0.1"  # Localhost (since bot is on same server)
 IDLE_LIMIT_MINUTES = 30  # Sleep after 30 mins of 0 players
-CHECK_INTERVAL = 10  # Check every 10 seconds
+CHECK_INTERVAL = 30  # Check every 30 seconds
 # ---------------------
 
 intents = discord.Intents.default()
@@ -174,6 +175,7 @@ async def monitor_server():
         else:
             IDLE_MINUTES = 0  # Reset timer if someone is playing
 
+    # pylint: disable=broad-except
     except Exception:
         # Server is running but Java isn't responding (Switching levels or booting)
         pass
