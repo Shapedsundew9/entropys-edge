@@ -1,2 +1,4 @@
 discord.py
 mcstatus
+dotenv
+psutil
